@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://iosvb.com">
-  <title>Archives: 2018 | Q.G的博客</title>
+  <title>地图绘制线条(百度与google差异) | Q.G的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Q.G的博客">
-<meta property="og:url" content="http://iosvb.com/archives/2018/index.html">
+  <meta name="description" content="1、轨迹回放：线条绘制与点到点动画百度地图线条绘制：[BMKPolyline setPolylineWithCoordinates:coor count:count];动画：[UIView animateWithDuration:node.distance/30/timeFloat animations:^{    currentIndex++;    BMKSportNode node = [s">
+<meta name="keywords" content="地图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="地图绘制线条(百度与google差异)">
+<meta property="og:url" content="http://iosvb.com/2018/09/04/地图绘制线条/index.html">
 <meta property="og:site_name" content="Q.G的博客">
+<meta property="og:description" content="1、轨迹回放：线条绘制与点到点动画百度地图线条绘制：[BMKPolyline setPolylineWithCoordinates:coor count:count];动画：[UIView animateWithDuration:node.distance/30/timeFloat animations:^{    currentIndex++;    BMKSportNode node = [s">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-04T12:41:55.296Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Q.G的博客">
+<meta name="twitter:title" content="地图绘制线条(百度与google差异)">
+<meta name="twitter:description" content="1、轨迹回放：线条绘制与点到点动画百度地图线条绘制：[BMKPolyline setPolylineWithCoordinates:coor count:count];动画：[UIView animateWithDuration:node.distance/30/timeFloat animations:^{    currentIndex++;    BMKSportNode node = [s">
   
     <link rel="alternative" href="/atom.xml" title="Q.G的博客" type="application/atom+xml">
   
@@ -155,36 +159,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-地图绘制线条" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/04/地图绘制线条/" class="archive-article-date">
-  	<time datetime="2018-09-04T12:23:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-04</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/04/地图绘制线条/">地图绘制线条(百度与google差异)</a>
+    <h1 class="article-title" itemprop="name">
+      地图绘制线条(百度与google差异)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/09/04/地图绘制线条/" class="archive-article-date">
+  	<time datetime="2018-09-04T12:23:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、轨迹回放：线条绘制与点到点动画<br>百度地图线条绘制：<br>[BMKPolyline setPolylineWithCoordinates:coor count:count];<br>动画：<br>[UIView animateWithDuration:node.distance/30/timeFloat animations:^{<br>    currentIndex++;<br>    BMKSportNode <em>node = [sportNodes objectAtIndex:currentIndex ];<br>    BMKPointAnnotation.coordinate = node.coordinate;<br>} completion:^(BOOL finished) {<br>    //循环<br>}];<br><a id="more"></a><br>google地图绘制线条：<br>GMSMutablePath </em>path = [GMSMutablePath path];<br>GMSPolyline.path=path;<br>动画：与百度不一样，使用[UIView animateWith] 无动画效果，没深究，然后使用CATransaction动画 加定时器<br>[CATransaction begin];<br>[CATransaction setValue:[NSNumber numberWithFloat:node1.distance/30/timeFloat] forKey:kCATransactionAnimationDuration];<br>gmsMarker.position = node.coordinate;<br>[CATransaction commit];<br>google地图移除覆盖物线条标注<br>self.map=nil；</p>
+<p>（google动画无效果原因google大头针继承NSObject，所以使用CATransaction）</p>
+<p>2、绘制多边形覆盖物（屏幕触摸点绘制多边形）<br>//百度：<br>//用户点击屏幕获取经纬度</p>
+<ul>
+<li>(void)mapView:(BMKMapView *)mapView onClickedMapBlank:(CLLocationCoordinate2D)coordinate<br>备注：需实现</li>
+<li>(BMKAnnotationView <em>)mapView:(BMKMapView </em>)mapView viewForAnnotation:(id <bmkannotation>)annotation此方法<br>点击大头针才回调<br>//点击大头针回调 </bmkannotation></li>
+<li>(void)mapView:(BMKMapView <em>)mapView didSelectAnnotationView:(BMKAnnotationView </em>)view</li>
+</ul>
+<p>google地图点击返回坐标</p>
+<ul>
+<li>(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate</li>
+</ul>
+<p>//点击大头针回调</p>
+<ul>
+<li>(void)mapView:(BMKMapView <em>)mapView didSelectAnnotationView:(BMKAnnotationView </em>)view<br>知道相应的代理实现多边形覆盖物就简单了~</li>
+</ul>
+<p>3、点到点旋转角度 距离计算</p>
+<p>#pragma mark – 两点距离角度计算<br>-(double)distanceBetweenPoints:(CLLocationCoordinate2D)startCoor endCoor:(CLLocationCoordinate2D)endCoor<br>{<br>double sx=startCoor.latitude;<br>double sy=startCoor.longitude;<br>double ex=endCoor.latitude;<br>double ey=endCoor.longitude;</p>
+<p>return sqrt(fabs(ex-sx)<em>fabs(ex-sx)+fabs(ey-sy)</em>fabs(ey-sy));<br>}<br>-(double)calcAngleStrtCoor:(CLLocationCoordinate2D)startCoor endCoor:(CLLocationCoordinate2D)endCoor<br>{<br>    //角度时钟0点计算旋转<br>    double sx=startCoor.latitude;<br>    double sy=startCoor.longitude;<br>    double ex=endCoor.latitude;<br>    double ey=endCoor.longitude;<br>    NSLog(@”start %f,%f”,sx,sy);<br>    double angle1= (atan2((ey-sy), (ex-sx)));<br>    double theta= angle1 <em>(180/M_PI);<br>    NSLog(@”%f”,theta);<br>    double theta1=90;<br>    NSLog(@”上一个角度%f”,theta1);<br>    i f (theta&lt;0) {<br>        theta=360-fabs(theta)-theta1;<br>    }else<br>    {<br>        theta=theta-theta1;<br>    }<br>    NSLog(@”旋转角度%f”,theta);<br>    angle1 = M_PI/180</em>theta;<br>    return angle1;<br>}</p>
+<p>4、根据GPS坐标 反地理编码</p>
+<p>//百度<br>geoCodeSearch = [[BMKGeoCodeSearch alloc] init];<br>geoCodeSearch.delegate = self;           BMKReverseGeoCodeOption *reverseGeoCodeOption= [[BMKReverseGeoCodeOption alloc] init];<br>reverseGeoCodeOption.reverseGeoPoint = coor;<br>[geoCodeSearch reverseGeoCode:reverseGeoCodeOption];<br>//BMKGeoCodeSearchDelegate</p>
+<ul>
+<li>(void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch <em>)searcher result:(BMKReverseGeoCodeResult </em>)result errorCode:(BMKSearchErrorCode)error {<br>  //result   位置信息<br>}</li>
+</ul>
+<p>//google<br>GMSReverseGeocodeCallback callBack = ^(GMSReverseGeocodeResponse <em>response, NSError </em>error) {<br>if(error == nil) {<br>    GMSAddress <em>firstResult = response.firstResult;<br>    NSString </em>country = firstResult.country;<br>    NSString <em>administrativeArea = firstResult.administrativeArea;<br>    NSString </em>locality = firstResult.locality;<br>    NSString <em>subLocality = firstResult.subLocality;<br>    NSString </em>thoroughfare = firstResult.thoroughfare;<br>    }<br>};<br>[[GMSGeocoder geocoder] reverseGeocodeCoordinate:coor completionHandler:callBack];</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -196,84 +244,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://iosvb.com/2018/09/04/地图绘制线条/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/09/04/UITextField控制输入长度/" class="archive-article-date">
-  	<time datetime="2018-09-04T11:50:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/09/04/UITextField控制输入长度/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">UITextField控制输入长度</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/04/UITextField控制输入长度/">UITextField控制输入长度</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/19/前言/" class="archive-article-date">
-  	<time datetime="2018-07-19T08:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/19/前言/">前言</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -297,8 +367,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
