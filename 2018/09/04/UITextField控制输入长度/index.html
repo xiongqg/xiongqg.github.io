@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://iosvb.com">
-  <title>Q.G的博客</title>
+  <title>UITextField控制输入长度 | Q.G的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Q.G的博客">
-<meta property="og:url" content="http://iosvb.com/index.html">
+  <meta name="description" content="UITextField控制输入长度">
+<meta name="keywords" content="随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITextField控制输入长度">
+<meta property="og:url" content="http://iosvb.com/2018/09/04/UITextField控制输入长度/index.html">
 <meta property="og:site_name" content="Q.G的博客">
+<meta property="og:description" content="UITextField控制输入长度">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-09-04T12:05:30.291Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Q.G的博客">
+<meta name="twitter:title" content="UITextField控制输入长度">
+<meta name="twitter:description" content="UITextField控制输入长度">
   
     <link rel="alternative" href="/atom.xml" title="Q.G的博客" type="application/atom+xml">
   
@@ -155,16 +159,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-UITextField控制输入长度" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-UITextField控制输入长度" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/UITextField控制输入长度/">UITextField控制输入长度</a>
+    <h1 class="article-title" itemprop="name">
+      UITextField控制输入长度
     </h1>
   
 
@@ -178,12 +180,35 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>#define kMaxLength 8</p>
-<p>self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGetMaxY(self.titleLabel.frame)+6, bgView.frame.size.width-52, 38)];<br>[self.accountTextField setFont:[UIFont systemFontOfSize:14]];<br>[self.accountTextField setBorderStyle:UITextBorderStyleRoundedRect];<br>[self.accountTextField setPlaceholder:@”请输入昵称”];<br>
-        
-          <a class="article-more-a" href="/2018/09/04/UITextField控制输入长度/#more">more >></a>
-        
+<p>self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGetMaxY(self.titleLabel.frame)+6, bgView.frame.size.width-52, 38)];<br>[self.accountTextField setFont:[UIFont systemFontOfSize:14]];<br>[self.accountTextField setBorderStyle:UITextBorderStyleRoundedRect];<br>[self.accountTextField setPlaceholder:@”请输入昵称”];<br><a id="more"></a><br>[self.accountTextField addTarget:self action:@selector(editChange:) forControlEvents:UIControlEventEditingChanged];<br>[self.accountTextField setClearButtonMode:UITextFieldViewModeAlways];<br>[bgView addSubview:self.accountTextField];</p>
+<ul>
+<li>(void)editChange:(UITextField<em>)textfield {<br>NSString </em>toBeString = textfield.text;<br>NSString <em>lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage; // 键盘输入模<br>if ([lang isEqualToString:@”zh-Hans”]) { // 简体中文输入，包括简体拼音，健体五笔，简体手写<br>UITextRange </em>selectedRange = [textfield markedTextRange];<br>//获取高亮部分<br>UITextPosition *position = [textfield positionFromPosition:selectedRange.start offset:0];<br>// 没有高亮选择的字，则对已输入的文字进行字数统计和限制<br>if (!position) {<br>if (toBeString.length &gt; kMaxLength)<br>{<br>NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:kMaxLength];<br>if (rangeIndex.length == 1)<br>{<br>textfield.text = [toBeString substringToIndex:kMaxLength];<br>}<br>else<br>{<br>NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0, kMaxLength)];<br>textfield.text = [toBeString substringWithRange:rangeRange];<br>}<br>}<br>}<br>}<br>// 中文输入法以外的直接对其统计限制即可，不考虑其他语种情况<br>else{<br>if (toBeString.length &gt; kMaxLength)<br>{<br>NSRange rangeIndex = [toBeString rangeOfComposedCharacterSequenceAtIndex:kMaxLength];<br>if (rangeIndex.length == 1)<br>{<br>textfield.text = [toBeString substringToIndex:kMaxLength];<br>}<br>else<br>{<br>NSRange rangeRange = [toBeString rangeOfComposedCharacterSequencesForRange:NSMakeRange(0,kMaxLength)];<br>textfield.text = [toBeString substringWithRange:rangeRange];<br>}<br>}<br>}</li>
+</ul>
+<p>}</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -203,16 +228,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/04/UITextField控制输入长度/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://iosvb.com/2018/09/04/UITextField控制输入长度/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/19/前言/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前言</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -232,71 +316,14 @@
 
 
 
-
   
-    <article id="post-前言" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/19/前言/">前言</a>
-    </h1>
   
 
-        
-        <a href="/2018/07/19/前言/" class="archive-article-date">
-  	<time datetime="2018-07-19T08:49:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##这里什么都没有</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/19/前言/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -320,8 +347,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
