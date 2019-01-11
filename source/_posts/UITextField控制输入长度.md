@@ -6,7 +6,7 @@ description: UITextField控制输入长度
 
 ---
 
-~~~
+~~~objectivec
 #define kMaxLength 8
 
 self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGetMaxY(self.titleLabel.frame)+6, bgView.frame.size.width-52, 38)];
@@ -18,7 +18,7 @@ self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGet
 [bgView addSubview:self.accountTextField];
 ~~~
 <!--more-->
-~~~
+```objectivec
 - (void)editChange:(UITextField*)textfield {
 	NSString *toBeString = textfield.text;
 	NSString *lang = [[UIApplication sharedApplication]textInputMode].primaryLanguage; // 键盘输入模
@@ -62,4 +62,4 @@ self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGet
 	}
 
 }
-~~~
+```
