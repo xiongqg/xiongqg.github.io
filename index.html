@@ -177,7 +177,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、轨迹回放：线条绘制与点到点动画<br>百度地图线条绘制：<br>[BMKPolyline setPolylineWithCoordinates:coor count:count];<br>动画：<br>[UIView animateWithDuration:node.distance/30/timeFloat animations:^{<br>    currentIndex++;<br>    BMKSportNode <em>node = [sportNodes objectAtIndex:currentIndex ];<br>    BMKPointAnnotation.coordinate = node.coordinate;<br>} completion:^(BOOL finished) {<br>    //循环<br>}];<br>
+        <p>1、轨迹回放：线条绘制与点到点动画</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//百度地图线条绘制：</span></span><br><span class="line">[BMKPolyline setPolylineWithCoordinates:coor count:count];</span><br><span class="line"><span class="comment">//动画：</span></span><br><span class="line">[<span class="built_in">UIView</span> animateWithDuration:node.distance/<span class="number">30</span>/timeFloat animations:^&#123;</span><br><span class="line">    currentIndex++;</span><br><span class="line">    BMKSportNode *node = [sportNodes objectAtIndex:currentIndex ];</span><br><span class="line">    BMKPointAnnotation.coordinate = node.coordinate;</span><br><span class="line">&#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">    <span class="comment">//循环</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
         
           <a class="article-more-a" href="/2018/09/04/地图绘制线条/#more">more >></a>
         
