@@ -6,7 +6,7 @@
 title: Q.G的博客
 subtitle: 春风十里不如你
 description: 
-keywords: "iOS,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder"
+keywords: "Q.G的博客,iOS,开发者,程序猿,程序媛,极客,编程,代码,开源,IT网站,Developer,Programmer,Coder"
 author: Q.G
 language:
 timezone:
@@ -80,7 +80,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: yilia
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
