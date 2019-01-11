@@ -13,7 +13,7 @@ self.accountTextField=[[UITextField alloc]initWithFrame:CGRectMake(26, CGRectGet
 [self.accountTextField setFont:[UIFont systemFontOfSize:14]];
 [self.accountTextField setBorderStyle:UITextBorderStyleRoundedRect];
 [self.accountTextField setPlaceholder:@"请输入昵称"];
-<!--查看-->
+<!--more-->
 [self.accountTextField addTarget:self action:@selector(editChange:) forControlEvents:UIControlEventEditingChanged];
 [self.accountTextField setClearButtonMode:UITextFieldViewModeAlways];
 [bgView addSubview:self.accountTextField];
